@@ -76,14 +76,12 @@ class Carrito {
     this.categorias = [];
   }
 
-  /**
-   * función que agrega @{cantidad} de productos con @{sku} al carrito
-   */
-  agregarProducto(sku, cantidad) {
+  //   función que agrega @{cantidad} de productos con @{sku} al carrito
+  async agregarProducto(sku, cantidad) {
     console.log(`Agregando ${cantidad} ${sku}`);
 
     // Busco el producto en la "base de datos"
-    const producto = findProductBySku(sku);
+    const producto = await findProductBySku(sku);
 
     if (producto) {
       console.log('Producto encontrado', producto);
@@ -107,7 +105,7 @@ class Carrito {
       console.log(`Error: Producto ${sku} no encontrado`);
     }
   }
-
+  //  Funcion eliminar producto
   eliminarProducto(sku, cantidad) {
     return new Promise((resolve, reject) => {
       console.log(`Eliminando ${cantidad} ${sku}`);
@@ -169,7 +167,7 @@ function findProductBySku(sku) {
 }
 
 const carrito = new Carrito();
-carrito.agregarProducto('WE328NJ', 2);
+carrito.agregarProducto('WE328NJ', 4);
 carrito
   .eliminarProducto('WE328NJ', 1)
   .then(() => {
